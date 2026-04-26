@@ -1,6 +1,83 @@
-<!-- Other existing content -->
-<div class="track-info">
-    <!-- Equalizer component here -->
-    <button class="lyrics-btn-icon" id="lyrics-btn" title="Show Lyrics"><i class="ph-fill ph-music-note"></i></button>
-</div>
-<!-- Other existing content -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Music Player</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="intro-screen" class="intro-screen">
+        <div class="intro-bg-split left" id="intro-left"></div>
+        <div class="intro-bg-split right" id="intro-right"></div>
+        <div class="intro-content" id="intro-content">
+            <div class="intro-logo">
+                <i class="ph-fill ph-headphones"></i>
+            </div>
+            <h1 class="intro-text">Rafi Andika</h1>
+            <p class="intro-subtext">Premium Audio Experience</p>
+        </div>
+    </div>
+    <div class="animated-bg" id="background-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+    <div class="background-overlay"></div>
+    <div class="player-container hidden" id="player-container">
+        <div class="cover-section">
+            <img id="cover-art" src="" alt="Album Cover" class="cover-art">
+        </div>
+        <div class="track-info">
+            <div class="text-info">
+                <h2 id="track-title" class="track-title">Loading...</h2>
+                <p id="track-artist" class="track-artist">-</p>
+            </div>
+            <div class="equalizer" id="equalizer">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+        <button class="lyrics-btn" id="lyrics-btn" title="Show Lyrics">
+            <i class="ph-fill ph-music-notes"></i>
+        </button>
+        <div class="progress-section">
+            <span id="current-time" class="time">0:00</span>
+            <input type="range" id="progress-bar" class="progress-bar" value="0" min="0" max="100" step="0.1">
+            <span id="duration-time" class="time">0:00</span>
+        </div>
+        <div class="controls-section">
+            <button class="control-btn" id="prev-btn" title="Previous">
+                <i class="ph-fill ph-skip-back"></i>
+            </button>
+            <button class="control-btn play-pause-btn" id="play-pause-btn" title="Play">
+                <i class="ph-fill ph-play" id="play-icon"></i>
+            </button>
+            <button class="control-btn" id="next-btn" title="Next">
+                <i class="ph-fill ph-skip-forward"></i>
+            </button>
+        </div>
+        <div class="volume-section">
+            <i class="ph ph-speaker-high" id="volume-icon"></i>
+            <input type="range" id="volume-bar" class="volume-bar" value="100" min="0" max="100" step="1">
+        </div>
+        <div class="lyrics-overlay hidden" id="lyrics-overlay">
+            <div class="lyrics-content">
+                <button class="close-lyrics" id="close-lyrics">
+                    <i class="ph-fill ph-x"></i>
+                </button>
+                <div class="lyrics-text" id="lyrics-text">Lyrics not available</div>
+            </div>
+        </div>
+    </div>
+    <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px;"></div>
+    <script src="script.js"></script>
+</body>
+</html>
