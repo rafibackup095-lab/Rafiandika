@@ -1,0 +1,524 @@
+:root {
+    --accent: #1db954;
+    /* Spotify green */
+    --accent-glow: rgba(29, 185, 84, 0.5);
+    --bg-dark: #0f0f0f;
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    --glass-bg: rgba(25, 25, 25, 0.4);
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);
+    background-color: var(--bg-dark);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* =========================================
+   Intro Screen
+========================================= */
+.intro-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.intro-bg-split {
+    position: absolute;
+    top: 0;
+    width: 50vw;
+    height: 100vh;
+    background-color: #050505;
+    transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1) 2.5s;
+}
+
+.intro-bg-split.left {
+    left: 0;
+}
+
+.intro-bg-split.right {
+    right: 0;
+}
+
+.intro-screen.split .intro-bg-split.left {
+    transform: translateX(-100%);
+}
+
+.intro-screen.split .intro-bg-split.right {
+    transform: translateX(100%);
+}
+
+.intro-content {
+    position: relative;
+    z-index: 101;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    opacity: 1;
+    transition: opacity 0.5s ease 2s, transform 0.5s ease 2s;
+}
+
+.intro-screen.split .intro-content {
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+.intro-logo {
+    font-size: 3rem;
+    color: var(--accent);
+    animation: floatLogo 2s ease-in-out infinite alternate;
+    filter: drop-shadow(0 0 15px var(--accent-glow));
+}
+
+.intro-text {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #fff, #b3b3b3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    animation: textReveal 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.intro-subtext {
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.8s;
+}
+
+@keyframes floatLogo {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+@keyframes textReveal {
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   Animated Glowing Orbs Background
+========================================= */
+.animated-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #050505;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    animation: orbFloat 25s infinite ease-in-out alternate;
+}
+
+.orb-1 { width: 50vw; height: 50vw; background: #1db954; top: -10%; left: -10%; animation-delay: 0s; }
+.orb-2 { width: 60vw; height: 60vw; background: #8a2be2; bottom: -20%; right: -10%; animation-delay: -5s; }
+.orb-3 { width: 40vw; height: 40vw; background: #00d2ff; top: 40%; left: 30%; animation-delay: -10s; }
+.orb-4 { width: 45vw; height: 45vw; background: #ff0055; bottom: 10%; left: -20%; animation-delay: -15s; }
+
+@keyframes orbFloat {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(10vw, 15vh) scale(1.1); }
+    66% { transform: translate(-10vw, -10vh) scale(0.9); }
+    100% { transform: translate(15vw, -15vh) scale(1.05); }
+}
+
+.background-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%);
+    z-index: 2;
+}
+
+/* =========================================
+   Main Player (Glassmorphism)
+========================================= */
+.player-container {
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 380px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: 32px;
+    padding: 30px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.player-container.hidden {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    pointer-events: none;
+}
+
+/* =========================================
+   Cover Art
+========================================= */
+.cover-section {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.cover-art {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* =========================================
+   Track Info & Equalizer
+========================================= */
+.track-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text-info {
+    max-width: 80%;
+}
+
+.track-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.track-artist {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.equalizer {
+    display: flex;
+    gap: 3px;
+    height: 20px;
+    align-items: flex-end;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.equalizer.active {
+    opacity: 1;
+}
+
+.equalizer .bar {
+    width: 4px;
+    background-color: var(--accent);
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+.equalizer.active .bar:nth-child(1) {
+    animation: eq 1.2s ease-in-out infinite alternate;
+}
+
+.equalizer.active .bar:nth-child(2) {
+    animation: eq 0.8s ease-in-out infinite alternate 0.2s;
+}
+
+.equalizer.active .bar:nth-child(3) {
+    animation: eq 1.5s ease-in-out infinite alternate 0.4s;
+}
+
+.equalizer.active .bar:nth-child(4) {
+    animation: eq 1.1s ease-in-out infinite alternate 0.1s;
+}
+
+@keyframes eq {
+    0% {
+        height: 4px;
+    }
+
+    100% {
+        height: 20px;
+    }
+}
+
+/* =========================================
+   Progress Section
+========================================= */
+.progress-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.time {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    min-width: 35px;
+    text-align: center;
+}
+
+/* Range Slider Styling */
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    margin-top: -3px;
+    /* center thumb */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.1s;
+    opacity: 0;
+    /* Hidden until hover for modern feel */
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    opacity: 1;
+}
+
+input[type="range"]:active::-webkit-slider-thumb {
+    transform: scale(1.3);
+}
+
+/* We will use a CSS variable to update the filled part of the track */
+.progress-bar {
+    background: linear-gradient(to right, var(--text-primary) var(--progress, 0%), rgba(255, 255, 255, 0.15) var(--progress, 0%)) !important;
+}
+
+.progress-bar:hover {
+    background: linear-gradient(to right, var(--accent) var(--progress, 0%), rgba(255, 255, 255, 0.15) var(--progress, 0%)) !important;
+}
+
+.volume-bar {
+    background: linear-gradient(to right, var(--text-primary) var(--volume, 100%), rgba(255, 255, 255, 0.15) var(--volume, 100%)) !important;
+}
+
+.volume-bar:hover {
+    background: linear-gradient(to right, var(--accent) var(--volume, 100%), rgba(255, 255, 255, 0.15) var(--volume, 100%)) !important;
+}
+
+
+/* =========================================
+   Controls Section
+========================================= */
+.controls-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 10px 0;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-btn:hover {
+    color: var(--accent);
+    transform: scale(1.1);
+    text-shadow: 0 0 15px var(--accent-glow);
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+}
+
+.play-pause-btn {
+    width: 65px;
+    height: 65px;
+    background-color: var(--text-primary);
+    color: var(--bg-dark);
+    border-radius: 50%;
+    font-size: 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.play-pause-btn:hover {
+    background-color: var(--accent);
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px var(--accent-glow);
+}
+
+.play-pause-btn:active {
+    transform: scale(0.95);
+}
+
+/* =========================================
+   Volume Section
+========================================= */
+.volume-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 10px;
+}
+
+.volume-section i {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.volume-section:hover i {
+    color: var(--text-primary);
+}
+
+/* =========================================
+   Responsive
+========================================= */
+@media (max-width: 400px) {
+    .player-container {
+        padding: 25px;
+        gap: 20px;
+    }
+
+    .play-pause-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.6rem;
+    }
+
+    .track-title {
+        font-size: 1.2rem;
+    }
+}
+
+/* =========================================
+   Lyrics Overlay
+========================================= */
+.lyrics-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    z-index: 5;
+    overflow-y: auto;
+}
+
+.lyrics-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.lyrics-text {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.8;
+    text-align: center;
+    white-space: pre-wrap;
+    font-weight: 500;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    margin: auto 0; /* allows scrolling but centers if small */
+    padding: 10px 0;
+}
+
+/* Custom scrollbar for lyrics */
+.lyrics-overlay::-webkit-scrollbar {
+    width: 4px;
+}
+.lyrics-overlay::-webkit-scrollbar-track {
+    background: transparent;
+}
+.lyrics-overlay::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+.lyrics-overlay::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
