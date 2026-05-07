@@ -1,83 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Music Player</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <link rel="stylesheet" href="styles.css">
+    <title>Tugas Matematika - Invers Fungsi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="intro-screen" class="intro-screen">
-        <div class="intro-bg-split left" id="intro-left"></div>
-        <div class="intro-bg-split right" id="intro-right"></div>
-        <div class="intro-content" id="intro-content">
-            <div class="intro-logo">
-                <i class="ph-fill ph-headphones"></i>
-            </div>
-            <h1 class="intro-text">Rafi Andika</h1>
-            <p class="intro-subtext">Premium Audio Experience</p>
-        </div>
-    </div>
-    <div class="animated-bg" id="background-container">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-        <div class="orb orb-4"></div>
-    </div>
-    <div class="background-overlay"></div>
-    <div class="player-container hidden" id="player-container">
-        <div class="cover-section">
-            <img id="cover-art" src="" alt="Album Cover" class="cover-art">
-        </div>
-        <div class="track-info">
-            <div class="text-info">
-                <h2 id="track-title" class="track-title">Loading...</h2>
-                <p id="track-artist" class="track-artist">-</p>
-            </div>
-            <div class="equalizer" id="equalizer">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <!-- Animated Background & Particles -->
+    <div class="bg-animated"></div>
+    <canvas id="particles"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar glass">
+        <div class="nav-content">
+            <div class="logo">MATH<span class="neon-purple">X</span></div>
+            <div class="student-info">
+                <span class="name">Muhamad Rafi Andika</span>
+                <span class="class-badge neon-border">XI TKJ</span>
             </div>
         </div>
-        <button class="lyrics-btn" id="lyrics-btn" title="Show Lyrics">
-            <i class="ph-fill ph-music-notes"></i>
-        </button>
-        <div class="progress-section">
-            <span id="current-time" class="time">0:00</span>
-            <input type="range" id="progress-bar" class="progress-bar" value="0" min="0" max="100" step="0.1">
-            <span id="duration-time" class="time">0:00</span>
-        </div>
-        <div class="controls-section">
-            <button class="control-btn" id="prev-btn" title="Previous">
-                <i class="ph-fill ph-skip-back"></i>
-            </button>
-            <button class="control-btn play-pause-btn" id="play-pause-btn" title="Play">
-                <i class="ph-fill ph-play" id="play-icon"></i>
-            </button>
-            <button class="control-btn" id="next-btn" title="Next">
-                <i class="ph-fill ph-skip-forward"></i>
-            </button>
-        </div>
-        <div class="volume-section">
-            <i class="ph ph-speaker-high" id="volume-icon"></i>
-            <input type="range" id="volume-bar" class="volume-bar" value="100" min="0" max="100" step="1">
-        </div>
-        <div class="lyrics-overlay hidden" id="lyrics-overlay">
-            <div class="lyrics-content">
-                <button class="close-lyrics" id="close-lyrics">
-                    <i class="ph-fill ph-x"></i>
-                </button>
-                <div class="lyrics-text" id="lyrics-text">Lyrics not available</div>
+    </nav>
+
+    <main class="container">
+        <!-- Hero Header -->
+        <header class="hero">
+            <h1 class="neon-text">Tugas Matematika</h1>
+            <h2 class="gradient-text">Invers Fungsi</h2>
+            <div class="glow-orb blue"></div>
+            <div class="glow-orb purple"></div>
+        </header>
+
+        <!-- Materi Section -->
+        <section class="content-section glass-card fade-in">
+            <div class="section-header">
+                <div class="icon-box neon-blue-box">📘</div>
+                <h2>Materi & Penjelasan</h2>
             </div>
+
+            <div class="text-content">
+                <p><strong>Invers fungsi</strong> adalah fungsi kebalikan dari suatu fungsi.</p>
+
+                <div class="highlight-box glass">
+                    <h3>Langkah mencari invers fungsi:</h3>
+                    <ol>
+                        <li>Ganti <strong>f(x)</strong> menjadi <strong>y</strong></li>
+                        <li>Tukar posisi <strong>x</strong> dan <strong>y</strong></li>
+                        <li>Selesaikan persamaan untuk mendapatkan <strong>y</strong></li>
+                        <li>Ganti <strong>y</strong> menjadi <strong>f⁻¹(x)</strong></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contoh Section -->
+        <section class="content-section glass-card fade-in">
+            <div class="section-header">
+                <div class="icon-box neon-purple-box">💡</div>
+                <h2>Contoh Sederhana</h2>
+            </div>
+
+            <div class="example-grid">
+                <div class="math-block">
+                    <p class="math-eq neon-blue-text">f(x) = 2x + 4</p>
+                </div>
+
+                <div class="step-block glass">
+                    <h4>Penyelesaian:</h4>
+                    <p class="mono">y = 2x + 4</p>
+                    <p class="mono">x = 2y + 4</p>
+                    <p class="mono">x − 4 = 2y</p>
+                    <p class="mono">y = (x − 4)/2</p>
+                </div>
+
+                <div class="result-block neon-border">
+                    <h4>Jadi:</h4>
+                    <p class="math-eq neon-purple-text">f⁻¹(x) = (x − 4)/2</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Soal dan Pembahasan Section -->
+        <section class="qa-container">
+            <div class="section-title fade-in">
+                <h2 class="neon-text-small">Soal & Pembahasan</h2>
+                <div class="line-decor"></div>
+            </div>
+
+            <!-- Soal 1 -->
+            <div class="qa-card glass fade-in">
+                <div class="q-header">
+                    <span class="q-badge">SOAL 1</span>
+                    <p class="q-text">Jika f(x) = 4x + 8, tentukan invers fungsi f(x).</p>
+                </div>
+                <div class="a-body">
+                    <h4>Jawaban & Pembahasan:</h4>
+                    <div class="mono-steps">
+                        <p>y = 4x + 8</p>
+                        <p class="note">// Tukar x dan y:</p>
+                        <p>x = 4y + 8</p>
+                        <p>x − 8 = 4y</p>
+                        <p>y = (x − 8)/4</p>
+                    </div>
+                    <div class="final-answer">
+                        <span>Jadi:</span> <span class="math-eq neon-blue-text">f⁻¹(x) = (x − 8)/4</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal 2 -->
+            <div class="qa-card glass fade-in">
+                <div class="q-header">
+                    <span class="q-badge">SOAL 2</span>
+                    <p class="q-text">Jika f(x) = 3x − 7, tentukan invers fungsi f(x).</p>
+                </div>
+                <div class="a-body">
+                    <h4>Jawaban & Pembahasan:</h4>
+                    <div class="mono-steps">
+                        <p>y = 3x − 7</p>
+                        <p>x = 3y − 7</p>
+                        <p>x + 7 = 3y</p>
+                        <p>y = (x + 7)/3</p>
+                    </div>
+                    <div class="final-answer">
+                        <span>Jadi:</span> <span class="math-eq neon-purple-text">f⁻¹(x) = (x + 7)/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal 3 -->
+            <div class="qa-card glass fade-in">
+                <div class="q-header">
+                    <span class="q-badge">SOAL 3</span>
+                    <p class="q-text">Diketahui f(x) = 3x − 5. Tentukan invers fungsi f(x).</p>
+                </div>
+                <div class="a-body">
+                    <h4>Jawaban & Pembahasan:</h4>
+                    <div class="mono-steps">
+                        <p>y = 3x − 5</p>
+                        <p>x = 3y − 5</p>
+                        <p>x + 5 = 3y</p>
+                        <p>y = (x + 5)/3</p>
+                    </div>
+                    <div class="final-answer">
+                        <span>Jadi:</span> <span class="math-eq neon-blue-text">f⁻¹(x) = (x + 5)/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal 4 -->
+            <div class="qa-card glass fade-in">
+                <div class="q-header">
+                    <span class="q-badge">SOAL 4</span>
+                    <p class="q-text">Tentukan invers dari f(x) = 2x + 6.</p>
+                </div>
+                <div class="a-body">
+                    <h4>Jawaban & Pembahasan:</h4>
+                    <div class="mono-steps">
+                        <p>y = 2x + 6</p>
+                        <p>x = 2y + 6</p>
+                        <p>x − 6 = 2y</p>
+                        <p>y = (x − 6)/2</p>
+                    </div>
+                    <div class="final-answer">
+                        <span>Jadi:</span> <span class="math-eq neon-purple-text">f⁻¹(x) = (x − 6)/2</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soal 5 -->
+            <div class="qa-card glass fade-in">
+                <div class="q-header">
+                    <span class="q-badge">SOAL 5</span>
+                    <p class="q-text">Diketahui f(x) = 4 − 5x. Tentukan invers fungsi f(x).</p>
+                </div>
+                <div class="a-body">
+                    <h4>Jawaban & Pembahasan:</h4>
+                    <div class="mono-steps">
+                        <p>y = 4 − 5x</p>
+                        <p>x = 4 − 5y</p>
+                        <p>5y = 4 − x</p>
+                        <p>y = (4 − x)/5</p>
+                        <p class="note">atau</p>
+                        <p>y = −(x − 4)/5</p>
+                    </div>
+                    <div class="final-answer">
+                        <span>Jadi:</span> <span class="math-eq neon-blue-text">f⁻¹(x) = −(x − 4)/5</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="glass footer-modern">
+        <div class="footer-glow"></div>
+        <div class="footer-content">
+            <p>Created by</p>
+            <h3 class="gradient-text">Muhamad Rafi Andika</h3>
+            <div class="footer-badge neon-border">XI TKJ</div>
         </div>
-    </div>
-    <div id="youtube-player" style="position: absolute; top: -9999px; left: -9999px;"></div>
+    </footer>
+
     <script src="script.js"></script>
 </body>
+
 </html>
